@@ -13,6 +13,7 @@ public class DriverFactory {
     	EdgeOptions options = new EdgeOptions();
         if (System.getProperty("headless", "false").equals("true")) { 
             options.addArguments("--headless"); 
+            options.addArguments("--disable-gpu"); 
             options.addArguments("--no-sandbox"); 
             options.addArguments("--disable-dev-shm-usage"); 
         }
