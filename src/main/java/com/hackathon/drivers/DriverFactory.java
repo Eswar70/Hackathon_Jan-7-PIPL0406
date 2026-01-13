@@ -11,6 +11,11 @@ public class DriverFactory {
 
     public static WebDriver initDriver() {
     	EdgeOptions options = new EdgeOptions();
+        if (System.getProperty("headless", "false").equals("true")) { 
+            options.addArguments("--headless"); 
+            options.addArguments("--no-sandbox"); 
+            options.addArguments("--disable-dev-shm-usage"); 
+        }
         options.setExperimentalOption("excludeSwitches", new String[] {"enable-automation"});
         options.addArguments("--start-maximized");
         driver.set(new EdgeDriver(options));
