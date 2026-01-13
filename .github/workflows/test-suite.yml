@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:   # allows manual run
 
 jobs:
   test:
@@ -21,10 +22,19 @@ jobs:
           java-version: '17'
 
       - name: Set up Maven
-        run: sudo apt-get install maven -y
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-      - name: Run Tests
-        run: mvn clean test
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Run Tests (Headless)
+        run: mvn clean test -Dheadless=true
 
       - name: Archive Test Reports
         uses: actions/upload-artifact@v3
