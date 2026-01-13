@@ -1,11 +1,11 @@
-name: Run Automation Tests
+name: Run Automation Tests (Edge)
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:   # allows manual run
+  workflow_dispatch:
 
 jobs:
   test:
@@ -20,20 +20,25 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      - name: Set up Maven
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
           cache: maven
 
-      - name: Install Chrome
+      - name: Install Microsoft Edge
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y wget apt-transport-https
+          wget https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge.list'
+          sudo apt-get update
+          sudo apt-get install -y microsoft-edge-stable
 
-      - name: Run Tests (Headless)
+      - name: Install Edge WebDriver
+        run: |
+          EDGE_VERSION=$(microsoft-edge --version | awk '{print $3}')
+          wget https://msedgedriver.azureedge.net/$EDGE_VERSION/edgedriver_linux64.zip
+          unzip edgedriver_linux64.zip
+          sudo mv msedgedriver /usr/local/bin/
+
+      - name: Run Selenium Tests (Edge Headless)
         run: mvn clean test -Dheadless=true
 
       - name: Archive Test Reports
