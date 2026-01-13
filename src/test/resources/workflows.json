@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Onboarding Process",
+    "description": "New employee onboarding workflow",
+    "priority": "High",
+    "category": "HR"
+  },
+  {
+    "title": "Quarterly Budget Approval",
+    "description": "Finance team budget approval for Q2",
+    "priority": "Medium",
+    "category": "Finance"
+  },
+  {
+    "title": "Vendor Risk Assessment",
+    "description": "Evaluate third-party vendor compliance",
+    "priority": "Low",
+    "category": "Compliance"
+  },
+  {
+    "title": "IT Asset Disposal",
+    "description": "Workflow for secure disposal of old hardware",
+    "priority": "Medium",
+    "category": "Operations"
+  }
+]

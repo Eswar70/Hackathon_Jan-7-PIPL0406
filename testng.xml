@@ -1,0 +1,44 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Hackathon Full Suite" parallel="false" thread-count="4">
+
+<listeners>
+  <listener class-name="com.hackathon.listeners.ExtentTestListener"/>
+</listeners>
+
+  <!-- API Tests -->
+  <test name="API Tests">
+    <groups>
+      <run>
+        <include name="api"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.hackathon.api"/>
+    </packages>
+  </test>
+
+  <!-- Security Tests -->
+  <test name="Security Tests">
+    <groups>
+      <run>
+        <include name="security"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.hackathon.security"/>
+    </packages>
+  </test>
+
+  <!-- UI Functional Tests -->
+  <test name="UI Tests">
+    <groups>
+      <run>
+        <include name="ui"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.hackathon.ui"/>
+    </packages>
+  </test>
+
+</suite>

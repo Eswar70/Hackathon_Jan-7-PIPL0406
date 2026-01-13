@@ -1,0 +1,33 @@
+name: Run Automation Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Maven
+        run: sudo apt-get install maven -y
+
+      - name: Run Tests
+        run: mvn clean test
+
+      - name: Archive Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: test-output/

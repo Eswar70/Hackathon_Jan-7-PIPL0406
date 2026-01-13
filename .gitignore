@@ -1,0 +1,19 @@
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# Maven build
+target/
+
+# Test outputs
+test-output/
+*.log
+*.mp4
+*.avi
+*.mov
+
+# OS files
+Thumbs.db
+.DS_Store
+ 
